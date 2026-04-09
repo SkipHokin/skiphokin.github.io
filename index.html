@@ -1,76 +1,448 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Skip's Classics</title>
-<style>
-body {
-  font-family: Arial;
-  max-width: 900px;
-  margin: auto;
-  background: #f4f4f4;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skip's Classics</title>
+  <style>
+    :root {
+      --bg: #f3efe8;
+      --panel: #ffffff;
+      --text: #1f2933;
+      --muted: #5b6b79;
+      --accent: #0f5c6e;
+      --accent-dark: #0a3f4c;
+      --accent-soft: #dcecef;
+      --border: #d8e1e8;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      --radius: 20px;
+      --max: 1120px;
+    }
 
-header {
-  background: #222;
-  color: white;
-  padding: 20px;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-nav a {
-  margin-right: 15px;
-  text-decoration: none;
-  color: darkblue;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-section {
-  background: white;
-  padding: 20px;
-  margin-top: 20px;
-}
-</style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(180deg, #e8f0f2 0px, var(--bg) 220px);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent-dark);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .wrap {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 42px 0 26px;
+    }
+
+    .hero-card {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 28px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 34px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 2px solid var(--accent);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button.secondary {
+      background: #fff;
+      color: var(--accent-dark);
+    }
+
+    .hero-photo {
+      min-height: 300px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #d7e1e5;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    section {
+      padding: 18px 0;
+    }
+
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #d8e2e6;
+    }
+
+    .card-content {
+      padding: 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+    }
+
+    .contact-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    footer {
+      padding: 28px 0 50px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-card,
+      .grid,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-card,
+      .section-card {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-<h1>Skip's Classics</h1>
-<p>Boat builds and workshop projects</p>
-</header>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">Skip's Classics</div>
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#downloads">Downloads</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<nav>
-<a href="#riviera">Riviera</a>
-<a href="#tug">Mini Tug</a>
-<a href="#printer">SkipCore350</a>
-<a href="#contact">Contact</a>
-</nav>
+  <main>
+    <section id="home" class="hero">
+      <div class="wrap hero-card">
+        <div>
+          <div class="eyebrow">Classic boats • workshop projects • build logs</div>
+          <h1>Boat builds, workshop projects, and the occasional engineered detour.</h1>
+          <p class="muted">
+            Welcome to Skip's Classics — a home for my Glen-L Riviera build, the Glen-L Mini Tug,
+            workshop experiments, and selected project files including STL and Blender models.
+          </p>
+          <div class="button-row">
+            <a class="button primary" href="#projects">View Projects</a>
+            <a class="button secondary" href="#contact">Contact Me</a>
+          </div>
+        </div>
 
-<section id="riviera">
-<h2>Glen-L Riviera</h2>
-<p>Build log of my Glen-L Riviera wooden runabout.</p>
-</section>
+        <div class="hero-photo">
+          <img src="https://placehold.co/1000x700?text=Main+Boat+Photo" alt="Main project photo">
+        </div>
+      </div>
+    </section>
 
-<section id="tug">
-<h2>Glen-L Mini Tug</h2>
-<p>Future build based on Glen-L Mini Tug plans.</p>
-</section>
+    <section id="projects">
+      <div class="wrap section-card">
+        <h2>Projects</h2>
+        <p class="muted">Current builds, future builds, and workshop projects worth documenting.</p>
 
-<section id="printer">
-<h2>SkipCore350 Printer</h2>
-<p>
-Project page:
-<a href="https://github.com/SkipHokin/SkipCore350">
-SkipCore350 Repository
-</a>
-</p>
-</section>
+        <div class="grid">
+          <article class="card">
+            <img src="https://placehold.co/800x600?text=Glen-L+Riviera" alt="Glen-L Riviera">
+            <div class="card-content">
+              <div class="tag">Current build</div>
+              <h3>Glen-L Riviera</h3>
+              <p>
+                The main build. Structure, planking, hardware, engine decisions, windscreen details,
+                and progress from the workshop.
+              </p>
+            </div>
+          </article>
 
-<section id="contact">
-<h2>Contact</h2>
-<p>
-Email:
-<a href="mailto:yourgmail@gmail.com">yourgmail@gmail.com</a>
-</p>
-</section>
+          <article class="card">
+            <img src="https://placehold.co/800x600?text=Glen-L+Mini+Tug" alt="Glen-L Mini Tug">
+            <div class="card-content">
+              <div class="tag">Future build</div>
+              <h3>Glen-L Mini Tug</h3>
+              <p>
+                A future project already on the drawing board, with space reserved here for plans,
+                notes, parts, and build photos.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://placehold.co/800x600?text=SkipCore350" alt="SkipCore350 Printer">
+            <div class="card-content">
+              <div class="tag">Workshop project</div>
+              <h3>SkipCore350 Printer</h3>
+              <p>
+                A practical engineering project alongside the boats. Design development, fabrication,
+                and component experimentation.
+              </p>
+              <p>
+                <a href="https://github.com/SkipHokin/SkipCore350">View repository</a>
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="wrap section-card">
+        <h2>Latest Gallery</h2>
+        <p class="muted">Replace these placeholders with real build photos as you go.</p>
+
+        <div class="grid">
+          <article class="card">
+            <img src="https://placehold.co/800x600?text=Photo+1" alt="Project gallery photo 1">
+            <div class="card-content">
+              <h3>Workshop progress</h3>
+              <p>Caption for a recent Riviera or workshop photo.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://placehold.co/800x600?text=Photo+2" alt="Project gallery photo 2">
+            <div class="card-content">
+              <h3>Hull detail</h3>
+              <p>Frame, planking, bracket work, or a nice milestone shot.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://placehold.co/800x600?text=Photo+3" alt="Project gallery photo 3">
+            <div class="card-content">
+              <h3>Another step forward</h3>
+              <p>A note about what happened and why it mattered.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="downloads">
+      <div class="wrap section-card">
+        <h2>Downloads</h2>
+        <p class="muted">A place for files, drawings, models, and project resources.</p>
+
+        <div class="grid">
+          <article class="card">
+            <div class="card-content">
+              <div class="tag">3D files</div>
+              <h3>STL Files</h3>
+              <p>Bracket prototypes, fixtures, and printable workshop helpers.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-content">
+              <div class="tag">CAD / design</div>
+              <h3>Blender Files</h3>
+              <p>Working models, concept geometry, and project development files.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-content">
+              <div class="tag">Reference</div>
+              <h3>Plans & Notes</h3>
+              <p>Diagrams, drawings, PDFs, and selected build notes.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap section-card contact-box">
+        <div>
+          <h2>Contact</h2>
+          <p>
+            For questions, parts sources, supplier information, or general classic boat discussion,
+            send me an email.
+          </p>
+          <p>
+            <strong>Email:</strong>
+            <a href="mailto:yourgmail@gmail.com">yourgmail@gmail.com</a>
+          </p>
+          <p class="muted">
+            Replace that with your Gmail address when you’re ready.
+          </p>
+        </div>
+
+        <div>
+          <h3>Planned additions</h3>
+          <ul class="contact-list">
+            <li>Separate Riviera page</li>
+            <li>Separate Mini Tug page</li>
+            <li>Full photo gallery</li>
+            <li>Download links for STL and Blender files</li>
+            <li>Workshop notes and updates</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © 2026 Skip's Classics — classic boats, workshop projects, and build logs.
+    </div>
+  </footer>
 
 </body>
 </html>
