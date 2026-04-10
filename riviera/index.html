@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Riviera Build | Skip's Classics</title>
+  <style>
+    :root {
+      --bg: #f4efe7;
+      --panel: #fffdf9;
+      --text: #2d221b;
+      --muted: #6c5849;
+      --accent: #6a2e20;
+      --accent-dark: #4a1f15;
+      --accent-soft: #efe2d2;
+      --border: #decfbe;
+      --shadow: 0 12px 28px rgba(50, 25, 12, 0.08);
+      --max: 1120px;
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eadfce 0px, var(--bg) 220px);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent-dark);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .wrap {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    /* Top navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(180deg, #6f3123, #4d1f15);
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      opacity: 0.95;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 34px 0 20px;
+    }
+
+    .hero-card {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 28px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 34px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2.15rem);
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .lead {
+      font-size: 1.06rem;
+      color: var(--muted);
+    }
+
+    .hero-photo {
+      background: #f8f2e8;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 16px;
+      min-height: 280px;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      border-radius: 14px;
+      object-fit: cover;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 12px 18px;
+      border: 2px solid var(--accent);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--accent-dark);
+    }
+
+    /* Page sections */
+    section {
+      padding: 18px 0;
+    }
+
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .section-intro {
+      max-width: 860px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .chapter {
+      padding: 22px 0 8px;
+      border-top: 1px solid #eadccc;
+    }
+
+    .chapter:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .chapter-copy {
+      max-width: 900px;
+      margin-bottom: 18px;
+    }
+
+    .chapter-copy p {
+      margin: 0 0 14px;
+    }
+
+    /* Photo grids */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .photo-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .photo-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #ddd4ca;
+    }
+
+    .photo-card .caption {
+      padding: 12px 14px 14px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .two-up {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    /* Pull quote / summary block */
+    .quote-box {
+      background: #f8efe4;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 18px 0 8px;
+      font-size: 1.05rem;
+      color: var(--accent-dark);
+    }
+
+    /* Footer */
+    footer {
+      padding: 28px 0 50px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-card,
+      .photo-grid,
+      .two-up {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-card,
+      .section-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <div class="brand">Skip's Classics</div>
+      <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="#top">Riviera</a>
+        <a href="#inspiration">Inspiration</a>
+        <a href="#build">Build</a>
+        <a href="#details">Details</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-card">
+        <div>
+          <div class="eyebrow">The Riviera Build</div>
+          <h1>From inspiration to timber, bronze, and a boat slowly becoming real.</h1>
+          <p class="lead">
+            This page tells the story of my Glen-L Riviera build, not as a strict timeline,
+            but as a progression from inspiration and intention through structure, engineering,
+            craftsmanship, and the gradual emergence of the boat itself.
+          </p>
+          <div class="button-row">
+            <a class="button primary" href="#inspiration">Start the Story</a>
+            <a class="button secondary" href="#build">Go to the Build</a>
+          </div>
+        </div>
+
+        <div class="hero-photo">
+          <!-- Replace with your main Riviera image -->
+          <img src="../images/riviera/riviera-hero.jpg" alt="Glen-L Riviera build hero image">
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap section-card">
+        <h2>The Riviera</h2>
+        <p class="section-intro">
+          The Riviera is one of those designs that carries both elegance and intent.
+          Long foredeck, classic runabout proportions, and just enough engineering complexity
+          to make the build as interesting as the finished boat.
+        </p>
+
+        <div class="quote-box">
+          Some projects begin with plans. This one began with places, people, and boats that stayed in the mind long enough to become a commitment.
+        </div>
+
+        <div class="chapter" id="inspiration">
+          <h2>Inspiration</h2>
+          <div class="chapter-copy">
+            <p>
+              The inspiration for this build came from a combination of experiences rather than a single moment.
+              Visiting Venice left a strong impression: elegant timber boats, long low lines, and the sense that a beautifully
+              built boat can feel completely at home in its surroundings.
+            </p>
+            <p>
+              That was reinforced later by attending Glen-L gatherings in Tennessee, where seeing finished boats built by
+              individuals made the idea far more tangible. Standing beside completed boats, talking to the people who built them,
+              and seeing the workmanship up close changes the way you think about what is possible.
+            </p>
+            <p>
+              Seeing other Rivieras in the flesh helped confirm that this design had exactly the presence I was looking for.
+              The project slowly moved from admiration to intention, and eventually from intention to action.
+            </p>
+          </div>
+
+          <div class="photo-grid">
+            <div class="photo-card">
+              <img src="../images/riviera/inspiration-01.jpg" alt="Inspiration photo 1">
+              <div class="caption">Use this for Venice, a gathering, plans, or another inspiration image.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/inspiration-02.jpg" alt="Inspiration photo 2">
+              <div class="caption">Another early influence or reference point.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/inspiration-03.jpg" alt="Inspiration photo 3">
+              <div class="caption">A completed Riviera or drawing that helped make the decision real.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chapter">
+          <h2>The Decision to Build</h2>
+          <div class="chapter-copy">
+            <p>
+              At some point the project shifts from daydream to commitment. Plans are ordered, the workshop starts being viewed
+              differently, and every piece of timber begins to look like it might eventually belong to the boat.
+            </p>
+            <p>
+              This stage is less dramatic than launching a boat or turning a hull upright, but it matters. It is where the
+              project quietly becomes inevitable.
+            </p>
+          </div>
+
+          <div class="two-up">
+            <div class="photo-card">
+              <img src="../images/riviera/decision-01.jpg" alt="Decision to build photo 1">
+              <div class="caption">Plans, timber, workspace, or early setup.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/decision-02.jpg" alt="Decision to build photo 2">
+              <div class="caption">Another image showing the transition from idea to build.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chapter" id="build">
+          <h2>The Structure Emerges</h2>
+          <div class="chapter-copy">
+            <p>
+              Every build has a moment where the boat first becomes visible. In this stage the structure begins to define the
+              hull, and what was once abstract starts to take on recognisable shape.
+            </p>
+            <p>
+              Frames, strongback, alignment, and the first clear hull lines are all part of that transition. There is still
+              a long way to go, but this is where the project begins to look like a boat rather than a set of materials.
+            </p>
+          </div>
+
+          <div class="photo-grid">
+            <div class="photo-card">
+              <img src="../images/riviera/structure-01.jpg" alt="Structure photo 1">
+              <div class="caption">Frames, setup, or strongback.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/structure-02.jpg" alt="Structure photo 2">
+              <div class="caption">Hull shape beginning to reveal itself.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/structure-03.jpg" alt="Structure photo 3">
+              <div class="caption">A good wide shot works nicely here.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chapter">
+          <h2>The Hull Takes Shape</h2>
+          <div class="chapter-copy">
+            <p>
+              Once the lines begin to flow from bow to stern, the character of the Riviera becomes much clearer.
+              Chines, battens, fairing, and planking all contribute to that satisfying shift from geometry to form.
+            </p>
+            <p>
+              This is one of the most visually rewarding parts of the build. The surfaces begin to read as one continuous hull,
+              and the design starts to show its elegance properly.
+            </p>
+          </div>
+
+          <div class="photo-grid">
+            <div class="photo-card">
+              <img src="../images/riviera/hull-01.jpg" alt="Hull photo 1">
+              <div class="caption">Fairing, hull lines, or planking in progress.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/hull-02.jpg" alt="Hull photo 2">
+              <div class="caption">Another sweeping hull view.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/hull-03.jpg" alt="Hull photo 3">
+              <div class="caption">Use a detail shot or milestone image.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chapter">
+          <h2>Engineering Decisions</h2>
+          <div class="chapter-copy">
+            <p>
+              Boatbuilding is never only woodworking. Mechanical layout, driveline thinking, shaft angles, mounts, brackets,
+              and other engineering choices all shape the eventual character of the boat.
+            </p>
+            <p>
+              This side of the project is part of the appeal: solving problems, weighing options, and working out how to make
+              the final boat both functional and faithful to the spirit of the build.
+            </p>
+          </div>
+
+          <div class="photo-grid">
+            <div class="photo-card">
+              <img src="../images/riviera/engineering-01.jpg" alt="Engineering photo 1">
+              <div class="caption">Engine, shaft, mockup, bracket, or mechanical problem-solving.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/engineering-02.jpg" alt="Engineering photo 2">
+              <div class="caption">A detail shot works well here.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/engineering-03.jpg" alt="Engineering photo 3">
+              <div class="caption">Use one photo that shows the workshop-thinking side of the build.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chapter" id="details">
+          <h2>Details and Craft</h2>
+          <div class="chapter-copy">
+            <p>
+              The Riviera rewards detail. Joinery, hardware, fittings, windscreen work, timber finish, and the many smaller
+              decisions all contribute to the overall feel of the boat.
+            </p>
+            <p>
+              These are often the moments that define the difference between a project that is merely assembled and one that
+              begins to feel crafted.
+            </p>
+          </div>
+
+          <div class="photo-grid">
+            <div class="photo-card">
+              <img src="../images/riviera/details-01.jpg" alt="Details photo 1">
+              <div class="caption">Hardware, windscreen, joinery, or deck detail.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/details-02.jpg" alt="Details photo 2">
+              <div class="caption">A close-up image is ideal in this section.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/details-03.jpg" alt="Details photo 3">
+              <div class="caption">Use a shot that feels crafted rather than structural.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chapter">
+          <h2>The Boat as a Whole</h2>
+          <div class="chapter-copy">
+            <p>
+              Eventually the collection of parts begins to read as one thing. The build moves from workshop tasks and
+              individual assemblies into a clearer sense of the finished boat.
+            </p>
+            <p>
+              Even before completion, there comes a stage where you can see the Riviera as a whole and recognise that the idea
+              which began with inspiration and observation is now sitting there in timber, shape, and presence.
+            </p>
+          </div>
+
+          <div class="photo-grid">
+            <div class="photo-card">
+              <img src="../images/riviera/whole-01.jpg" alt="Boat as a whole photo 1">
+              <div class="caption">A wider shot of the build.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/whole-02.jpg" alt="Boat as a whole photo 2">
+              <div class="caption">Another full-view or cockpit/deck view.</div>
+            </div>
+            <div class="photo-card">
+              <img src="../images/riviera/whole-03.jpg" alt="Boat as a whole photo 3">
+              <div class="caption">Use something that feels like a payoff image.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © 2026 Skip's Classics — The Riviera Build.
+    </div>
+  </footer>
+
+</body>
+</html>
